@@ -1,24 +1,55 @@
 const http = require("http");
 const fs = require("fs");
-const path = require("path");
+
 
 const server = http.createServer((req, res) => {
   console.log(`Incoming request: ${req.url}`); 
 
-  let filePath = "";
+  
   switch (req.url) {
     case "/":
-      filePath = path.join(__dirname, "index.html");
+      filePath = fs.readfile("index.html" , (err,data)=>{
+        if(err) {
+          console.log(error);
+        }
+        else
+        {
+          console.logd(data);
+          res.setHeader('Content-Type', 'text/html');
+          res.end(data);
+        }
+      };
       break;
     case "/About":
-      filePath = path.join(__dirname, "about.html");
+      filePath = fs.readfile("about.html" , (err,data)=>{
+        if(err) {
+          console.log(error);
+        }
+        else
+        {
+          console.logd(data);
+          res.setHeader('Content-Type', 'text/html');
+          res.end(data);
+        }
+      };
       break;
     case "/Contact":
-      filePath = path.join(__dirname, "contact.html");
+      filePath = fs.readfile("contact.html" , (err,data)=>{
+        if(err) {
+          console.log(error);
+        }
+        else
+        {
+          console.logd(data);
+          res.setHeader('Content-Type', 'text/html');
+          res.end(data);
+        }
+      };
       break;
     default:
-      filePath = path.join(__dirname, "404.html");
       res.statusCode = 404;
+      res.setHeader('Content-Type', 'text/html')
+      res.end(<h1> page doesnt exist<h1/>)
       break;
   }
 
@@ -38,3 +69,4 @@ const PORT = 3000;
 server.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
